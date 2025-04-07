@@ -1,0 +1,40 @@
+% Diese Datei muss mit Lualatex kompiliert werden.
+
+\documentclass[
+	paper=a4,
+	fontsize=10pt,
+	pagesize=auto,
+	DIV=14,
+	BCOR=20mm,
+	headsepline,
+	parskip=half
+]{scrbook}
+
+
+\newcommand{\mytitle}{Grundlagen der Elektrizität – Praxisheft}
+\newcommand{\myauthor}{T. Jenni}
+\newcommand{\mydate}{\today}
+\newcommand{\mysubject}{Einführung in die Elektrizitätslehre für Schülerinnen und Schüler}
+\newcommand{\mykeywords}{Elektrizität, Physik, Praxisheft, Schaltungen, Ohmsches Gesetz}
+
+
+\input{00_preamble.tex}
+
+
+\showanswersfalse % \showanswerstrue oder \showanswersfalse
+
+\begin{document}
+
+\input{00_titelseite.tex}
+\renewcommand{\contentsname}{Inhalt}
+\tableofcontents
+\input{01_einleitung.tex}
+\input{02_stromkreis.tex}
+\input{03_stromstaerke.tex}
+\input{04_spannung.tex}
+\input{05_ohmschesgesetz.tex}
+\input{06_leistung.tex}
+\input{07_schlusswort.tex}
+\input{08_glossar.tex}
+
+\end{document}

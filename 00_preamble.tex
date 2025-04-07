@@ -1,0 +1,178 @@
+% FONTS UND SPRACHE
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setdefaultlanguage[spelling=new,babelshorthands=true]{german}
+
+% MATHEMATIK UND NATURWISSENSCHAFT
+\usepackage{mathtools}					% loads amsmath, e.g. pmatrix*
+\usepackage{unicode-math}				% e.g. mathbb
+\usepackage{siunitx}		            % SI-Unit package
+
+
+% GRAFIK UND BILD
+\usepackage{graphicx}					% bitmap graphics
+\usepackage{tikz}						% vector graphics
+\usetikzlibrary{calc}
+\usepackage{pgfplots}					% plotting
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots}
+
+
+% LAYOUT UND DESIGN
+\usepackage{scrlayer-scrpage}			% koma script package
+\usepackage{tabularx}					% full width tables
+\usepackage{makecell}					% controll tablecell size
+\usepackage[most]{tcolorbox}	        % fancy boxes
+\usepackage{subcaption}
+\usepackage{pageslts}
+
+
+% TEXTERWEITERUNGEN UND SONSTIGES
+\usepackage[plainpages=false,pdfpagelabels]{hyperref}	% urls
+\usepackage{bookmark} 					%
+\usepackage{cancel}						% cancel chars
+\usepackage{comment}					% comments
+\usepackage[normalem]{ulem}		        % underline
+\usepackage{environ}					% better environment
+\usepackage{qrcode}						% generate qrcodes
+\usepackage{xcolor}						% colors
+\usepackage{emoji}						% insert emoji
+
+
+
+%*********************
+% INITIALISIERUNGEN
+%*********************
+
+% siunitx
+\sisetup{
+	output-decimal-marker = {.},
+	per-mode = symbol,
+	separate-uncertainty = false,
+	add-decimal-zero = true,
+	exponent-product = \cdot,
+	round-mode=none
+}
+
+% hyperref
+\hypersetup{pdfencoding=auto}
+\hypersetup{
+  pdftitle={\mytitle},
+  pdfauthor={\myauthor},
+  pdfsubject={\mysubject},
+  pdfkeywords={\mykeywords}
+}
+
+% set * to \cdot in math mode
+\mathcode`\*="8000
+\begingroup
+  \catcode`\*=\active
+  \gdef*{\cdot}
+\endgroup
+
+
+
+%*******************
+% LAYOUT
+%*******************
+
+% Nummerierung der Sections ohne Punkt (z. B. "1.1 Einleitung")
+\renewcommand{\thesection}{\thechapter.\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+
+% Keine Nummern in Kopfzeilen
+\renewcommand*{\sectionmarkformat}{}
+
+% Kopfzeilen-Schrift normal (nicht kursiv)
+\setkomafont{pageheadfoot}{\normalfont}
+
+% Abstand Kopf → Text
+\headsep=1cm
+
+% Scrlayer-Scrpage Kopf- und Fusszeilen aktivieren
+\clearpairofpagestyles
+\pagestyle{scrheadings}
+\automark[section]{section}
+
+% Kopfzeilen links/mitte/rechts (für gerade/ungerade Seiten identisch)
+\ihead{\myauthor}
+\chead{\headmark}
+\ohead{\mydate}
+
+% Fusszeile mit Seitenzahl z. B. 5 / 24
+\pagenumbering{arabic}
+\cfoot{\hfill \thepage\ / \lastpages{arabic}{1}}
+
+
+
+%************************
+%* LAYOUT KONFIGURATION *
+%************************
+
+% Nummerierungen
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\theequation}{\arabic{equation}}
+
+% Beschriftungen (deutsch)
+\addto\captionsgerman{%
+  \renewcommand{\figurename}{Abb.}%
+  \renewcommand{\tablename}{Tab.}%
+}
+
+% Kurzreferenzen
+\newcommand{\fref}[1]{Abb.~\ref{#1}}
+\newcommand{\tref}[1]{Tab.~\ref{#1}}
+
+% Setze Emoji Schriftart
+\setemojifont{TwemojiMozilla}
+
+
+
+%**************************
+% DEFINITIONEN UND MAKROS *
+%**************************
+
+\newtcolorbox{greenbox}{
+    enhanced,
+    boxrule=0pt,frame hidden,
+    borderline west={4pt}{0pt}{green!75!black},
+    colback=green!10!white,
+    sharp corners
+}
+
+\newtcolorbox{redbox}{
+    enhanced,
+    boxrule=0pt,frame hidden,
+    borderline west={4pt}{0pt}{red!75!black},
+    colback=red!10!white,
+    sharp corners
+}
+
+
+
+\newcounter{exercise}
+\setcounter{exercise}{1}
+\newcommand{\exercise}[2][pencil]{
+    \subsection*{\makebox(0,0)[r]{\huge\emoji{#1}\hspace{1em}}Aufgabe \theexercise\  -- #2}
+    \addtocounter{exercise}{1}
+}
+
+\newcounter{experiment}
+\setcounter{experiment}{1}
+\newcommand{\experiment}[2][screwdriver]{
+    \subsection*{\makebox(0,0)[r]{\rotatebox[origin=c]{270}{\huge\emoji{#1}}\hspace{1em}}Experiment \theexperiment\  -- #2}
+    \addtocounter{experiment}{1}
+}
+
+
+\newcommand{\marker}{\fontspec{Marker Felt}\fontsize{5mm}{8mm}\selectfont}
+
+\newcommand{\markertable}{\fontspec{Marker Felt}\fontsize{5mm}{12mm}\selectfont}
+
+
+\newif\ifshowanswers
+\showanswerstrue % oder \showanswersfalse
+
+\newcommand{\answer}[1]{\ifshowanswers #1 \fi}
+\newcommand{\noanswer}[1]{\ifshowanswers \else #1 \fi}
