@@ -32,3 +32,9 @@ Die Elektrizitätsboxen JX-D03 sind von Paxeroly und wurden über Aliexpress gek
 https://www.aliexpress.com/store/1103438345
 
 https://de.aliexpress.com/item/1005007357173497.html
+
+
+## Lizenz
+
+Dieses Projekt steht unter der **CC BY-NC-SA 4.0-Lizenz**. Siehe `LICENSE`-Datei
+für weitere Details.
